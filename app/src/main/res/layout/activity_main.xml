@@ -4,17 +4,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
         <variable
-            name="todoList"
-            type="com.todo.todolist.MainActivity" />
+            name="viewModel"
+            type="com.todo.todolist.vm.TodoViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".MainActivity">
+        tools:context=".view.MainActivity">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
+            android:adapter="@{viewModel.getTodoAdapter()}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toTopOf="@+id/exitText"
@@ -23,6 +24,7 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/exitText"
+            android:text="@{viewModel.todoText}"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="50dp"
@@ -34,7 +36,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="추가"
-            android:onClickListener="@{() -> todoList.buttonPressed()}"
+            android:onClickListener="@{() -> viewModel.buttonPressed()}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/exitText"
             app:layout_constraintTop_toTopOf="@+id/exitText" />
